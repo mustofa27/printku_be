@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('print_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->bigInteger('price_per_page');
             $table->timestamps();
         });
     }

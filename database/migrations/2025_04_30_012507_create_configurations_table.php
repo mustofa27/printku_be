@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('configurations', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('commission_value');
+            $table->bigInteger('commission_type');
+            $table->dateTime('time_start');
+            $table->dateTime('time_end');
             $table->timestamps();
         });
     }

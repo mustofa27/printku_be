@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('print_files', function (Blueprint $table) {
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
+            $table->morphs('tokenable');
             $table->string('name');
-            $table->string('path');
-            $table->integer('page_count');
-            $table->integer('copy_count');
-            $table->bigInteger('price');
-            $table->foreignId('print_type_id')->constrained();
-            $table->foreignId('transaction_id')->constrained();
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('print_files');
+        Schema::dropIfExists('personal_access_tokens');
     }
 };
